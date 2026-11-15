@@ -30,7 +30,7 @@ const CONTENT = {
     showPhone: false,                // set to true to show your phone number on the site
     linkedin: "https://www.linkedin.com/in/william-quiceno-jr-b6461a361",
     resumePdf: "",                   // optional, e.g. "photos/resume.pdf" — adds a download button
-    intro: "Supply Chain Management student at Rutgers. Fluent in Spanish. On Giants game days I fix ticketing problems in under two minutes.",
+    intro: "Supply Chain Management student at Rutgers.",
     bio: [
       "I study Supply Chain Management at Rutgers University in New Brunswick and graduate in May 2029.",
       "On Giants home games I work the gates as a Ticket Resolution Specialist, sorting out ticketing problems so fans get into an 80,000-seat stadium fast. At Mason Gross Community Arts I translate Spanish to English for guests at live performances. I also run the website and email lists for the Rutgers University Glee Club."
@@ -46,7 +46,7 @@ const CONTENT = {
     coursework: ["Intro to Management", "Intro to Supply Chain", "Macroeconomics", "Microeconomics"]
   },
 
-  // Shown in this order. "object" picks the drawing: ticket, playbill, planttag (or none).
+  // Shown in this order. "object" picks the drawing: ticket, concert, playbill, planttag (or none).
   experience: [
     {
       org: "New York Football Giants", short: "NY Giants",
@@ -61,7 +61,7 @@ const CONTENT = {
     {
       org: "Rutgers University Glee Club", short: "Glee Club",
       role: "IT Coordinator", place: "New Brunswick, NJ",
-      start: "Apr 2026", end: "Present", object: "none", kind: "Leadership",
+      start: "Apr 2026", end: "Present", object: "concert", kind: "Leadership",
       bullets: [
         "Optimized website performance, the listserv database and digital infrastructure, keeping communication reliable for 100+ active ensemble members."
       ]
@@ -316,7 +316,7 @@ main section.page.on{display:block;animation:roll .45s cubic-bezier(.2,.8,.2,1)}
   box-shadow:0 2px 8px rgba(0,0,0,.15);backdrop-filter:blur(1px);transform:rotate(-2.5deg)}
 .sleeve .cap{font:600 9px var(--mono);letter-spacing:.18em;text-align:center;color:rgba(29,32,38,.75);margin-bottom:6px}
 .photo{aspect-ratio:4/5;background:var(--paper);display:grid;place-items:center;overflow:hidden;position:relative}
-.photo img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.photo img{width:100%;height:100%;object-fit:cover;object-position:50% 50%}
 .photo .pending{text-align:center;color:var(--paper-soft);font:500 10px/1.4 var(--mono);letter-spacing:.1em;padding:8px}
 .photo .pending svg{width:46%;margin:0 auto 6px;opacity:.5}
 .label{position:absolute;right:5%;top:22%;width:47%;background:var(--paper);color:var(--paper-ink);padding:10px 12px 8px;
@@ -367,12 +367,13 @@ main section.page.on{display:block;animation:roll .45s cubic-bezier(.2,.8,.2,1)}
 @media (max-width:640px){ .track li{grid-template-columns:1fr auto;gap:4px 10px} .track .what{grid-column:1 / -1} }
 
 /* ---------- unpacked objects ---------- */
-.unpacked{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:34px;margin-top:44px;align-items:center}
+.unpacked{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:44px 56px;margin:44px auto 0;max-width:940px;align-items:center}
+.unpacked .ticket{max-width:400px;margin-inline:auto}
 .obj{all:unset;cursor:pointer;display:block;transition:transform .25s cubic-bezier(.2,.8,.2,1)}
 .obj:hover{transform:translateY(-6px) rotate(0deg)!important}
 .obj:focus-visible{outline:3px solid var(--safety);outline-offset:6px}
 .obj .hint{display:block;margin-top:12px;text-align:center;font:500 11px var(--mono);letter-spacing:.12em;color:var(--ink-soft);text-transform:uppercase}
-@media (max-width:900px){ .unpacked{grid-template-columns:1fr;max-width:420px;margin-inline:auto} }
+@media (max-width:760px){ .unpacked{grid-template-columns:1fr;max-width:420px;margin-inline:auto} }
 
 /* ticket stub */
 .ticket{display:grid;grid-template-columns:1fr 64px;background:var(--paper);color:var(--paper-ink);box-shadow:var(--shadow);
@@ -385,7 +386,12 @@ main section.page.on{display:block;animation:roll .45s cubic-bezier(.2,.8,.2,1)}
 .ticket .grid div{font:700 20px/1 var(--display);letter-spacing:.02em}
 .ticket .grid small{display:block;font:500 8.5px var(--mono);letter-spacing:.12em;color:var(--paper-soft);margin-bottom:2px}
 .ticket .stub{writing-mode:vertical-rl;display:flex;align-items:center;justify-content:center;gap:10px;font:600 10px var(--mono);letter-spacing:.2em;background:var(--stamp);color:#fff}
-.ticket .stub b{font:900 18px var(--display);letter-spacing:.1em}
+.ticket.concert .stub{background:#2F5D86}
+.ticket.concert .k{color:#2F5D86}
+.ticket .grid div.sm{font-size:15px;line-height:1.1}
+.ticket .stub b{font:900 15px var(--display);letter-spacing:.06em}
+.ticket .stub span{font-size:9px;letter-spacing:.1em}
+.ticket .stub{gap:6px!important;padding:8px 0;overflow:hidden}
 
 /* playbill */
 .playbill{background:var(--paper);color:var(--paper-ink);box-shadow:var(--shadow);max-width:290px;margin-inline:auto;border:1px solid rgba(0,0,0,.08)}
@@ -728,7 +734,7 @@ dialog.wide .dlg-body{padding:0;background:#0E0F12}
       <div class="shiplabel" id="shiplabel"></div>
       <div class="side">
         <div class="floor-tag">RETURN TO SENDER</div>
-        <p>Recruiting for a supply chain, operations or bilingual guest-services role? Send a message. I read every one.</p>
+        <p>Have a question, an opportunity, or just want to connect? Email me or find me on LinkedIn.</p>
         <div class="btnrow"><a class="btn solid" id="c-linkedin" target="_blank" rel="noopener">LinkedIn ↗</a>
           <button class="btn" type="button" data-open-resume>Résumé</button></div>
       </div>
@@ -779,7 +785,7 @@ dialog.wide .dlg-body{padding:0;background:#0E0F12}
   </section>
 </main>
 
-<footer><div class="wrap"><span id="foot-l"></span><span>Built as a distribution center. Every fact on this site comes from my résumé.</span></div></footer>
+<footer><div class="wrap"><span id="foot-l"></span></div></footer>
 
 <button class="clipfab" type="button" data-open-resume aria-label="Open résumé">
   <svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="4" width="16" height="20" rx="1.5"/><rect x="9" y="2" width="8" height="4" rx="1" fill="currentColor"/><path d="M9 11h8M9 15h8M9 19h5"/></svg>
@@ -853,13 +859,19 @@ $('#track').innerHTML = C.experience.map((x,i) => {
       <button class="peek" type="button" data-exp="${i}">details</button></span></li>`; }).join('');
 
 // unpacked objects
-const tilt = ['-2deg','1.5deg','-1deg'];
+const tilt = ['-2deg','1.5deg','1deg','-1.5deg'];
 const objHTML = (x,i) => {
   if (x.object === 'ticket') return `<div class="ticket"><div class="main">
       <div class="k">GAME DAY · ${esc(x.place.toUpperCase())}</div>
       <h3>${esc(x.short)}<br>Ticket Resolution</h3>
       <div class="grid"><div><small>PATRONS / GAME</small>20,000+</div><div><small>ISSUES RESOLVED</small>100+</div>
       <div><small>HOME GAMES</small>8</div><div><small>TIME TO RESOLVE</small>&lt; 2 MIN</div></div></div>
+      <div class="stub"><b>ADMIT ONE</b><span>${esc(x.start.toUpperCase())} – ${esc(x.end.toUpperCase())}</span></div></div>`;
+  if (x.object === 'concert') return `<div class="ticket concert"><div class="main">
+      <div class="k">IT DESK · ${esc(x.place.toUpperCase())}</div>
+      <h3>${esc(x.short)}<br>${esc(x.role)}</h3>
+      <div class="grid"><div><small>MEMBERS SUPPORTED</small>100+</div><div class="sm"><small>SYSTEMS</small>Website · Listserv</div>
+      <div><small>ACDA NATIONALS</small>TOP 2%</div><div><small>APPLICANTS</small>1,000+</div></div></div>
       <div class="stub"><b>ADMIT ONE</b><span>${esc(x.start.toUpperCase())} – ${esc(x.end.toUpperCase())}</span></div></div>`;
   if (x.object === 'playbill') return `<div class="playbill"><div class="band">Front of House <span>Tonight</span></div>
       <div class="body"><div class="lang">ES <i>⇄</i> EN</div><h3>${esc(x.role.replace('Front of House ',''))}</h3>
@@ -872,7 +884,7 @@ const objHTML = (x,i) => {
   return '';
 };
 $('#unpacked').innerHTML = C.experience.map((x,i) => x.object && x.object !== 'none' ?
-  `<button class="obj" type="button" data-exp="${i}" style="transform:rotate(${tilt[i%3]})" aria-label="${esc(x.role)} at ${esc(x.org)}: open details">${objHTML(x,i)}<span class="hint">Tap to inspect</span></button>` : '').join('');
+  `<button class="obj" type="button" data-exp="${i}" style="transform:rotate(${tilt[i%4]})" aria-label="${esc(x.role)} at ${esc(x.org)}: open details">${objHTML(x,i)}<span class="hint">Tap to inspect</span></button>` : '').join('');
 
 // involvement tags
 $('#rail').innerHTML = C.involvement.map((v,i) => `<div class="ftag ${v.priority?'priority':''}" style="--d:${-i*0.9}s">
